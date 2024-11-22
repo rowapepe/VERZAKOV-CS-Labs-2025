@@ -1,8 +1,6 @@
 #include <cstddef>
 
-namespace {}  // namespace
-
-namespace IntegralSolver {
+namespace {
 struct I_print {
     const char* name;
     double i_sum;
@@ -14,9 +12,13 @@ struct Results {
     double sum;
     int n;
 };
+}  // namespace
 
+namespace IntegralSolver {
 Results IntRect(double (*function)(double), double a, double b, double eps);
 Results IntTrap(double (*function)(double), double a, double b, double eps);
+
+void PrintTabl(I_print i_prn[], size_t k);
 
 void ExecuteApp();
 }  // namespace IntegralSolver
