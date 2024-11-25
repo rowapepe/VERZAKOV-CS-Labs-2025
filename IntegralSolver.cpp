@@ -22,6 +22,7 @@ const int kCoefficientX = 22;
 const double kDivisorArithmeticMean = 2.0;
 const double kDivisorFunction3 = 5.0;
 const int kMaxSymbolsAccuracy = 6;
+const int kRungeDivisor = 3;
 
 [[nodiscard]] double CalculateFunction1(double x) {
     return x;
@@ -60,11 +61,12 @@ Results IntRect(double (*function)(double), double a, double b, double eps) {
     int n = 1;
     double h{};
     double prevSum = 0.0;
-    double sum = 0.0;
+    double sum = 1.0;
 
-    while (fabs(sum - prevSum) > eps || n * 2 <= kMaxNumberSegments) {
+    while ((std::fabs(sum - prevSum) / kRungeDivisor) > eps && n * 2 <= kMaxNumberSegments) {
         prevSum = sum;
         sum = 0.0;
+        n *= 2;
         h = (b - a) / n;
 
         for (int i = 0; i < n; ++i) {
@@ -72,34 +74,31 @@ Results IntRect(double (*function)(double), double a, double b, double eps) {
         }
 
         sum *= h;
-        n *= 2;
     }
 
-    return {.sum = sum, .n = n};
+    return {sum, n};
 }
 
 Results IntTrap(double (*function)(double), double a, double b, double eps) {
-    double sum{};
-    double prevSum{};
+    double sum = 1.0;
+    double prevSum = 0.0;
     int n = 1;
-    double dx{};
-    double x1{};
-    double x2{};
+    double h{};
 
-    while (std::fabs(sum - prevSum) > eps || n * 2 < kMaxNumberSegments) {
+    while ((std::fabs(sum - prevSum) / kRungeDivisor) > eps && n * 2 <= kMaxNumberSegments) {
         prevSum = sum;
         sum = 0;
         n *= 2;
-        dx = (b - a) / n;
+        h = (b - a) / n;
 
         for (int i = 0; i < n; ++i) {
-            x1 = a + i * dx;
-            x2 = a + (i + 1) * dx;
-            sum += ((x2 - x1) * (function(x1) + function(x2))) / kDivisorArithmeticMean;
+            sum += (function(a + i * h) + function(a + (i + 1) * h)) / kDivisorArithmeticMean;
         }
+
+        sum *= h;
     }
 
-    return {.sum = sum, .n = n};
+    return {sum, n};
 }
 
 void PrintTabl(I_print i_prn[], size_t k) {
@@ -171,7 +170,7 @@ void ExecuteApp() {
             i_prn[j] = {functions[j], IntSum[j], Int[j], N[j]};
         }
 
-        std::cout << "Метод прямоугольников. eps: " << std::setw(i) << eps << "\n";
+        std::cout << "Метод прямоугольников. eps: " << std::fixed << std::setprecision(i) << eps << "\n";
         PrintTabl(i_prn, 4);
         std::cout << "\n\n";
 
@@ -194,7 +193,7 @@ void ExecuteApp() {
             i_prn[j] = {functions[j], IntSum[j], Int[j], N[j]};
         }
 
-        std::cout << "Метод трапеций. eps: " << std::setw(i) << eps << "\n";
+        std::cout << "Метод трапеций. eps: " << std::fixed << std::setprecision(i) << eps << "\n";
         PrintTabl(i_prn, 4);
         std::cout << "\n\n";
     }
