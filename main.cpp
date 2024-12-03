@@ -1,5 +1,5 @@
-#include "IntegralSolver.hpp"
+#include "Dictionary.hpp"
 
 int main(int, char**) {
-    IntegralSolver::ExecuteApp();
+    Dictionary::ExecuteApp();
 }
