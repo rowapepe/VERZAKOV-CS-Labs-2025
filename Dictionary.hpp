@@ -8,12 +8,12 @@ struct Dict {
 
 enum class Task {
     AddWord = 1,
-    DeleteWord = 2,
-    TranslateFromEnglishToRussian = 3,
-    TranslateFromRussianToEnglish = 4,
-    PrintDictionary = 5,
-    SaveDictionaryToFile = 6,
-    Exit = 7,
+    DeleteWord,
+    TranslateFromEnglishToRussian,
+    TranslateFromRussianToEnglish,
+    PrintDictionary,
+    SaveDictionaryToFile,
+    Exit
 };
 
 void ExecuteApp();
