@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(Dictionary)
+project(InverseMatrixCalculator)
 
 set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 
 set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Dictionary.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/InverseMatrixCalculator.cpp
 )
 
 set(HEADERS
-    ${CMAKE_CURRENT_SOURCE_DIR}/Dictionary.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/InverseMatrixCalculator.hpp
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES} ${HEADERS})

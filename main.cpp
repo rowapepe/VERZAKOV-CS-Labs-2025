@@ -1,5 +1,5 @@
-#include "Dictionary.hpp"
+#include "InverseMatrixCalculator.hpp"
 
 int main(int, char**) {
-    Dictionary::ExecuteApp();
+    InverseMatrixCalculator::ExecuteApp();
 }
