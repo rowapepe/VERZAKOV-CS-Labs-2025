@@ -7,10 +7,12 @@ set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/InverseMatrixCalculator.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/mprinter.cpp
 )
 
 set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/InverseMatrixCalculator.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/mprinter.hpp
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES} ${HEADERS})
