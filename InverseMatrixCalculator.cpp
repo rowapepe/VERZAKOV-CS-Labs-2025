@@ -6,27 +6,67 @@
 #include <iostream>
 
 namespace {
-double** CreateMatrix(int size) {
-    double** matrix = new double*[size];
-    for (int i = 0; i < size; ++i) {
-        matrix[i] = new double[2 * size]();
+const int kPrecision = 6;
+double** CreateMatrix(int n, int m) {
+    double** matrix = new double*[n];
+    for (int i = 0; i < n; ++i) {
+        matrix[i] = new double[m]();
     }
     return matrix;
 }
 
-void DeleteMatrix(double** matrix, int size) {
-    for (int i = 0; i < size; ++i) {
+void DeleteMatrix(double** matrix, int n) {
+    for (int i = 0; i < n; ++i) {
         delete[] matrix[i];
     }
     delete[] matrix;
 
     matrix = nullptr;
 }
+
+double Determinant(double** matrix, int size) {
+    if (!matrix) {
+        return 0;
+    }
+
+    double** bigMatrix = CreateMatrix(size, 2 * size);
+    double result{};
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            bigMatrix[i][j + size] = matrix[i][j];
+            bigMatrix[i][j] = matrix[i][j];
+        }
+    }
+
+    for (int i = 0; i < size; i++) {
+        double front = 1;
+        for (int j = 0; j < size; j++) {
+            front *= bigMatrix[j][i + j];
+        }
+        result += front;
+    }
+
+    for (int i = size * 2 - 1; i >= size; i--) {
+        double back = 1;
+        for (int j = 0; j < size; j++) {
+            back *= bigMatrix[j][i - j];
+        }
+
+        result -= back;
+    }
+
+    DeleteMatrix(bigMatrix, size);
+    return result;
+}
 }  // namespace
 
 namespace InverseMatrixCalculator {
 bool GaussJordan(double** matrix, int size) {
-    double** bigMatrix = CreateMatrix(size);
+    if (!matrix) {
+        return false;
+    }
+
+    double** bigMatrix = CreateMatrix(size, 2 * size);
 
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
@@ -52,9 +92,9 @@ bool GaussJordan(double** matrix, int size) {
             }
         }
 
-        double diagElement = bigMatrix[k][k];
+        double diagonalElement = bigMatrix[k][k];
         for (int j = 0; j < 2 * size; ++j) {
-            bigMatrix[k][j] /= diagElement;
+            bigMatrix[k][j] /= diagonalElement;
         }
 
         for (int i = k + 1; i < size; ++i) {
@@ -66,7 +106,7 @@ bool GaussJordan(double** matrix, int size) {
     }
 
     std::cout << "Промежуточная матрица после прямого обхода:" << std::endl;
-    mprinter::PrintMatrix(bigMatrix, size, 2 * size);
+    mprinter::PrintMatrix(bigMatrix, size, 2 * size, kPrecision);
 
     for (int k = size - 1; k >= 0; --k) {
         for (int i = k - 1; i >= 0; --i) {
@@ -78,7 +118,7 @@ bool GaussJordan(double** matrix, int size) {
     }
 
     std::cout << "Промежуточная матрица после обратного обхода:" << std::endl;
-    mprinter::PrintMatrix(bigMatrix, size, 2 * size);
+    mprinter::PrintMatrix(bigMatrix, size, 2 * size, kPrecision);
 
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
@@ -111,6 +151,11 @@ void FillMatrix(double** matrix, std::ifstream& file, int size) {
 
 void ExecuteApp() {
     std::ifstream file("matrix.txt");
+    if (!file.is_open()) {
+        std::cout << "Не получилось открыть файл с матрицей и ее размером." << std::endl;
+        return;
+    }
+
     int size{};
     file >> size;
 
@@ -119,36 +164,36 @@ void ExecuteApp() {
         return;
     }
 
-    double** matrix = CreateMatrix(size);
+    double** matrix = CreateMatrix(size, size);
 
     FillMatrix(matrix, file, size);
     file.close();
 
     std::cout << "Исходная матрица:" << std::endl;
-    mprinter::PrintMatrix(matrix, size, size);
+    mprinter::PrintMatrix(matrix, size, size, 1);
 
-    double** inversedMatrix = CreateMatrix(size);
+    double** inversedMatrix = CreateMatrix(size, size);
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
             inversedMatrix[i][j] = matrix[i][j];
         }
     }
 
-    if (!GaussJordan(inversedMatrix, size)) {
-        std::cout << "Обратная матрица не существует." << std::endl;
+    if (Determinant(matrix, size) == 0 || !GaussJordan(inversedMatrix, size)) {
+        std::cout << "Обратная матрица не существует (определитель равен 0)." << std::endl;
         DeleteMatrix(matrix, size);
         DeleteMatrix(inversedMatrix, size);
         return;
     }
 
     std::cout << "Обратная матрица:" << std::endl;
-    mprinter::PrintMatrix(inversedMatrix, size, size);
+    mprinter::PrintMatrix(inversedMatrix, size, size, kPrecision);
 
-    double** resultMatrix = CreateMatrix(size);
+    double** resultMatrix = CreateMatrix(size, size);
     MultiplyMatrix(matrix, inversedMatrix, resultMatrix, size);
 
     std::cout << "Результат умножения исходной матрицы на обратную:" << std::endl;
-    mprinter::PrintMatrix(resultMatrix, size, size);
+    mprinter::PrintMatrix(resultMatrix, size, size, 1);
 
     DeleteMatrix(matrix, size);
     DeleteMatrix(inversedMatrix, size);

@@ -6,11 +6,10 @@
 namespace {
 const int kMaxLineLength = 80;
 const int kColumnWidth = 12;
-const int kPrecision = 8;
 }  // namespace
 
 namespace mprinter {
-void PrintMatrix(double** matrix, int n, int m) {
+void PrintMatrix(double** matrix, int n, int m, int precision) {
     int maxColumnsPerLine = kMaxLineLength / kColumnWidth;
     if (maxColumnsPerLine < 1) {
         maxColumnsPerLine = 1;
@@ -22,7 +21,7 @@ void PrintMatrix(double** matrix, int n, int m) {
 
         for (int i = 0; i < n; ++i) {
             for (int j = blockStart; j < blockEnd; ++j) {
-                std::cout << std::fixed << std::setw(kColumnWidth) << std::setprecision(kPrecision) << matrix[i][j];
+                std::cout << std::fixed << std::setw(kColumnWidth) << std::setprecision(precision) << matrix[i][j];
             }
             std::cout << std::endl;
         }
