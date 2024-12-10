@@ -12,6 +12,7 @@ double** CreateMatrix(int n, int m) {
     for (int i = 0; i < n; ++i) {
         matrix[i] = new double[m]();
     }
+
     return matrix;
 }
 
