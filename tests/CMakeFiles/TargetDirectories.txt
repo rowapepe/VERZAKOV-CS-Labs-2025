@@ -1,0 +1,9 @@
+/home/rowapepe/VERZAKOV-CS-Labs-2025/tests/CMakeFiles/lab1.dir
+/home/rowapepe/VERZAKOV-CS-Labs-2025/tests/CMakeFiles/edit_cache.dir
+/home/rowapepe/VERZAKOV-CS-Labs-2025/tests/CMakeFiles/rebuild_cache.dir
+/home/rowapepe/VERZAKOV-CS-Labs-2025/tests/mymath/CMakeFiles/mymath.dir
+/home/rowapepe/VERZAKOV-CS-Labs-2025/tests/mymath/CMakeFiles/edit_cache.dir
+/home/rowapepe/VERZAKOV-CS-Labs-2025/tests/mymath/CMakeFiles/rebuild_cache.dir
+/home/rowapepe/VERZAKOV-CS-Labs-2025/tests/division/CMakeFiles/division.dir
+/home/rowapepe/VERZAKOV-CS-Labs-2025/tests/division/CMakeFiles/edit_cache.dir
+/home/rowapepe/VERZAKOV-CS-Labs-2025/tests/division/CMakeFiles/rebuild_cache.dir

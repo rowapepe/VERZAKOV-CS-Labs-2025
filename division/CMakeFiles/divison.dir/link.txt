@@ -1,0 +1,2 @@
+/usr/bin/ar qc libdivison.a CMakeFiles/divison.dir/division.cpp.o
+/usr/bin/ranlib libdivison.a
