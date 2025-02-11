@@ -1,5 +1,5 @@
-#include "InverseMatrixCalculator.hpp"
+#include <iostream>
 
 int main(int, char**) {
-    InverseMatrixCalculator::ExecuteApp();
+    std::cout << "Hello, world!";
 }
