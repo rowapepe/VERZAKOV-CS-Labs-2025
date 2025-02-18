@@ -1,14 +1,16 @@
-#include "division/division.h"
-#include "mymath/mymath.h"
-#include <iostream>
+#include <fstream>
+#include "planets/planets.hpp"
 
 int main() {
-  setlocale(LC_ALL, "Russian");
-  std::cout << "Я умею суммировать! Зацени 1+1=";
-  std::cout << mymath::sum(10, 32) << std::endl;
+    std::fstream file;
+    file.open("Planets.txt");
+    int k20 = 20;
+    Planets::Planet* planets = new Planets::Planet[k20];
+    Planets::Planet::ReadDB(file, planets, k20);
 
-  std::cout << "А также умею делить! Зацени 8/2=";
-  std::cout << division::div(8, 2) << std::endl;
+    for (int i = 0; i < k20; ++i) {
+        planets[i].PrintPlanet();
+    }
 
-  return 0;
+    return 0;
 }
