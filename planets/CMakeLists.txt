@@ -1,20 +1,13 @@
 cmake_minimum_required(VERSION 3.23)
 
-set(project "planets")
-project(${project})
+set(PROJECT_NAME "planets")
+project(${PROJECT_NAME})
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(${project}_SOURCES
-        planets.cpp)
+set(SOURCES planets.cpp)
+set(HEADERS planets.hpp)
 
-set(${project}_HEADERS
-        planets.hpp)
+add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 
-set(${project}_SOURCE_LIST
-        ${${project}_SOURCES}
-        ${${project}_HEADERS})
-
-add_library(${project}
-        STATIC
-        ${${project}_SOURCE_LIST})
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
