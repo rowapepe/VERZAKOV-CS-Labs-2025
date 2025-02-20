@@ -106,7 +106,7 @@ std::ofstream& operator<<(std::ofstream& file, Planet& planet) {
 
 std::ifstream& operator>>(std::ifstream& file, Planet& planet) {
     char n[kBuffSize]{};
-    double d{};
+    int d{};
     bool l{};
     int sn{};
 
@@ -273,7 +273,7 @@ void Planet::DeleteElement(Planet*& planets, int& size) {
         if (i == point) {
             continue;
         }
-        newPlanets[++j] = planets[i];
+        newPlanets[j++] = planets[i];
     }
 
     DeleteDB(planets, size);
