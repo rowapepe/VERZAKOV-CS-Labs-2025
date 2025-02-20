@@ -29,9 +29,9 @@ class Candidat {
     Candidat& operator=(const Candidat& other);
     friend std::ofstream& operator<<(std::ofstream& file, Candidat& candidat);
     friend std::ifstream& operator>>(std::ifstream& file, Candidat& candidat);
-    friend bool operator==(Candidat& candidat1, const char* n);
-    friend bool operator<(Candidat& candidat1, Candidat& candidat2);
-    friend bool operator<(Candidat& candidat1, const char* n);
+    bool operator==(const char* n);
+    bool operator<(Candidat& candidat2);
+    bool operator<(const char* n);
 
     static void Resize(Candidat*& candidats, int& size);
     static void DeleteDB(Candidat*& candidats, int size);

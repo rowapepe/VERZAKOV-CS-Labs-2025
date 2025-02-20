@@ -52,7 +52,6 @@ Candidat::Candidat(const Candidat& other) {
 
 Candidat::~Candidat() {
     delete[] name;
-    name = nullptr;
 }
 
 void Candidat::SetName(const char* n) {
@@ -135,24 +134,24 @@ std::ifstream& operator>>(std::ifstream& file, Candidat& candidat) {
     return file;
 }
 
-bool operator==(Candidat& сandidat, const char* n) {
-    if (strcmp(сandidat.GetName(), n) == 0) {
+bool Candidat::operator==(const char* n) {
+    if (strcmp(this->GetName(), n) == 0) {
         return true;
     } else {
         return false;
     }
 }
 
-bool operator<(Candidat& сandidat1, Candidat& сandidat2) {
-    if (strcmp(сandidat1.GetName(), сandidat2.GetName()) < 0) {
+bool Candidat::operator<(Candidat& сandidat2) {
+    if (strcmp(this->GetName(), сandidat2.GetName()) < 0) {
         return true;
     } else {
         return false;
     }
 }
 
-bool operator<(Candidat& сandidat1, const char* n) {
-    if (strcmp(сandidat1.GetName(), n) < 0) {
+bool Candidat::operator<(const char* n) {
+    if (strcmp(this->GetName(), n) < 0) {
         return true;
     } else {
         return false;
@@ -160,7 +159,7 @@ bool operator<(Candidat& сandidat1, const char* n) {
 }
 
 void Candidat::Resize(Candidat*& candidats, int& size) {
-    Candidat* newCandidats = new Candidat[size + 1]();
+    Candidat* newCandidats = new Candidat[size + 1];
 
     for (int i = 0; i < size; ++i) {
         newCandidats[i] = candidats[i];
@@ -174,10 +173,6 @@ void Candidat::Resize(Candidat*& candidats, int& size) {
 void Candidat::DeleteDB(Candidat*& candidats, int size) {
     if (!candidats) {
         return;
-    }
-
-    for (int i = 0; i < size; ++i) {
-        candidats[i].~Candidat();
     }
 
     delete[] candidats;
@@ -194,7 +189,7 @@ void Candidat::ReadDB(Candidat*& candidats, int& size) {
     Candidat temp;
 
     while (file >> temp) {
-        if (size == 1 && candidats[0]== "\0") {
+        if (size == 1 && candidats[0] == "\0") {
             candidats[0] = temp;
         } else {
             Resize(candidats, size);
@@ -255,7 +250,7 @@ void Candidat::AddElement(Candidat*& candidats, int& size) {
     char r[kBuffSize]{};
     int vn{};
 
-    std::cout << "Введите измененные имя кандидата, пол (мужской - 1, женский - 0), регион, количество голосов: ";
+    std::cout << "Введите имя кандидата, пол (мужской - 1, женский - 0), регион, количество голосов: ";
     std::cin >> n >> m >> r >> vn;
     std::cout << std::endl;
 

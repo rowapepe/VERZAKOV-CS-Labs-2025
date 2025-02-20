@@ -29,9 +29,9 @@ class Planet {
     Planet& operator=(const Planet& other);
     friend std::ofstream& operator<<(std::ofstream& file, Planet& planet);
     friend std::ifstream& operator>>(std::ifstream& file, Planet& planet);
-    friend bool operator==(Planet& planet1, const char* n);
-    friend bool operator<(Planet& planet1, Planet& planet2);
-    friend bool operator<(Planet& planet1, const char* n);
+    bool operator==(const char* n);
+    bool operator<(Planet& planet2);
+    bool operator<(const char* n);
 
     static void Resize(Planet*& planets, int& size);
     static void DeleteDB(Planet*& planets, int size);

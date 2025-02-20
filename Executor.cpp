@@ -27,36 +27,36 @@ void ExecutePlanetsApp() {
         std::cin >> task;
         std::cout << std::endl;
 
-        switch (static_cast<PlanetsTasks>(task)) {
-            case PlanetsTasks::Read: {
+        switch (static_cast<Tasks>(task)) {
+            case Tasks::Read: {
                 Planets::Planet::ReadDB(planets, size);
                 break;
             }
-            case PlanetsTasks::Write: {
+            case Tasks::Write: {
                 Planets::Planet::WriteDB(planets, size);
                 break;
             }
-            case PlanetsTasks::Sort: {
+            case Tasks::Sort: {
                 Planets::Planet::SortDB(planets, 0, size - 1);
                 break;
             }
-            case PlanetsTasks::Add: {
+            case Tasks::Add: {
                 Planets::Planet::AddElement(planets, size);
                 break;
             }
-            case PlanetsTasks::Delete: {
+            case Tasks::Delete: {
                 Planets::Planet::DeleteElement(planets, size);
                 break;
             }
-            case PlanetsTasks::Edit: {
+            case Tasks::Edit: {
                 Planets::Planet::EditDB(planets, size);
                 break;
             }
-            case PlanetsTasks::Print: {
+            case Tasks::Print: {
                 Planets::Planet::PrintDB(planets, size);
                 break;
             }
-            case PlanetsTasks::Exit: {
+            case Tasks::Exit: {
                 Planets::Planet::DeleteDB(planets, size);
                 return;
             }
@@ -86,36 +86,36 @@ void ExecuteDebatsApp() {
         std::cin >> task;
         std::cout << std::endl;
 
-        switch (static_cast<DebatsTasks>(task)) {
-            case DebatsTasks::Read: {
+        switch (static_cast<Tasks>(task)) {
+            case Tasks::Read: {
                 Candidats::Candidat::ReadDB(Candidats, size);
                 break;
             }
-            case DebatsTasks::Write: {
+            case Tasks::Write: {
                 Candidats::Candidat::WriteDB(Candidats, size);
                 break;
             }
-            case DebatsTasks::Sort: {
+            case Tasks::Sort: {
                 Candidats::Candidat::SortDB(Candidats, 0, size - 1);
                 break;
             }
-            case DebatsTasks::Add: {
+            case Tasks::Add: {
                 Candidats::Candidat::AddElement(Candidats, size);
                 break;
             }
-            case DebatsTasks::Delete: {
+            case Tasks::Delete: {
                 Candidats::Candidat::DeleteElement(Candidats, size);
                 break;
             }
-            case DebatsTasks::Edit: {
+            case Tasks::Edit: {
                 Candidats::Candidat::EditDB(Candidats, size);
                 break;
             }
-            case DebatsTasks::Print: {
+            case Tasks::Print: {
                 Candidats::Candidat::PrintDB(Candidats, size);
                 break;
             }
-            case DebatsTasks::Exit: {
+            case Tasks::Exit: {
                 Candidats::Candidat::DeleteDB(Candidats, size);
                 return;
             }

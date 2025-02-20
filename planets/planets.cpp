@@ -45,7 +45,6 @@ Planet::Planet(const Planet& other) {
 
 Planet::~Planet() {
     delete[] name;
-    name = nullptr;
 }
 
 void Planet::SetName(const char* n) {
@@ -119,24 +118,24 @@ std::ifstream& operator>>(std::ifstream& file, Planet& planet) {
     return file;
 }
 
-bool operator==(Planet& planet1, const char* n) {
-    if (strcmp(planet1.GetName(), n) == 0) {
+bool Planet::operator==(const char* n) {
+    if (strcmp(this->GetName(), n) == 0) {
         return true;
     } else {
         return false;
     }
 }
 
-bool operator<(Planet& planet1, Planet& planet2) {
-    if (strcmp(planet1.GetName(), planet2.GetName()) < 0) {
+bool Planet::operator<(Planet& planet2) {
+    if (strcmp(this->GetName(), planet2.GetName()) < 0) {
         return true;
     } else {
         return false;
     }
 }
 
-bool operator<(Planet& planet1, const char* n) {
-    if (strcmp(planet1.GetName(), n) < 0) {
+bool Planet::operator<(const char* n) {
+    if (strcmp(this->GetName(), n) < 0) {
         return true;
     } else {
         return false;
@@ -144,7 +143,7 @@ bool operator<(Planet& planet1, const char* n) {
 }
 
 void Planet::Resize(Planet*& planets, int& size) {
-    Planet* newPlanets = new Planet[size + 1]();
+    Planet* newPlanets = new Planet[size + 1];
 
     for (int i = 0; i < size; ++i) {
         newPlanets[i] = planets[i];
@@ -158,10 +157,6 @@ void Planet::Resize(Planet*& planets, int& size) {
 void Planet::DeleteDB(Planet*& planets, int size) {
     if (!planets) {
         return;
-    }
-
-    for (int i = 0; i < size; ++i) {
-        planets[i].~Planet();
     }
 
     delete[] planets;
@@ -178,7 +173,7 @@ void Planet::ReadDB(Planet*& planets, int& size) {
     Planet temp;
 
     while (file >> temp) {
-        if (size == 1 && planets[0]== "\0") {
+        if (size == 1 && planets[0] == "\0") {
             planets[0] = temp;
         } else {
             Resize(planets, size);
@@ -267,7 +262,7 @@ void Planet::DeleteElement(Planet*& planets, int& size) {
         return;
     }
 
-    Planet* newPlanets = new Planet[size - 1]();
+    Planet* newPlanets = new Planet[size - 1];
 
     for (int i = 0, j = 0; i < size; ++i) {
         if (i == point) {
