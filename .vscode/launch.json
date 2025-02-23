@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "CMake Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/lab2",
+            "args": ["${workspaceFolder}/build/Planets.txt"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set up source directories for GDB",
+                    "text": "-gdb-set substitute-path /build/ /home/rowapepe/VERZAKOV-CS-Labs-2025/"
+                }
+            ],
+            "sourceFileMap": {
+                "/build/": "/home/rowapepe/VERZAKOV-CS-Labs-2025/"
+            }
+        }
+    ]
+}
