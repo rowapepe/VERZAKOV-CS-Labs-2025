@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.23)
 
-project(candidats)
+project(fractions)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCES candidats.cpp)
-set(HEADERS candidats.hpp)
+set(SOURCES fractions.cpp)
+set(HEADERS fractions.hpp)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 

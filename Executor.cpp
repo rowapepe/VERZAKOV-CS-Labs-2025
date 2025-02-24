@@ -1,151 +1,49 @@
 #include "Executor.hpp"
 #include <iostream>
-#include "candidats.hpp"
-#include "planets/planets.hpp"
+#include <iomanip>
+#include "fractions/fractions.hpp"
 
 namespace {
-const int kBuffSize = 100;
 }
 
 namespace Executor {
-void ExecutePlanetsApp() {
-    int task{};
-
-    int size = 1;
-    Planets::Planet* planets = new Planets::Planet[size]();
-
-    while (true) {
-        std::cout << "Выберите номер, интересующего вас задания, и введите его в консоль для перехода\n";
-        std::cout << "1. Чтение БД из файла\n";
-        std::cout << "2. Запись БД в файл\n";
-        std::cout << "3. Сортировка БД\n";
-        std::cout << "4. Добавление нового объекта в БД\n";
-        std::cout << "5. Удаление объекта из БД\n";
-        std::cout << "6. Редактирование БД\n";
-        std::cout << "7. Вывод БД на экран\n";
-        std::cout << "0. Выход\n";
-        std::cin >> task;
-        std::cout << std::endl;
-
-        switch (static_cast<Tasks>(task)) {
-            case Tasks::Read: {
-                Planets::Planet::ReadDB(planets, size);
-                break;
-            }
-            case Tasks::Write: {
-                Planets::Planet::WriteDB(planets, size);
-                break;
-            }
-            case Tasks::Sort: {
-                Planets::Planet::SortDB(planets, 0, size - 1);
-                break;
-            }
-            case Tasks::Add: {
-                Planets::Planet::AddElement(planets, size);
-                break;
-            }
-            case Tasks::Delete: {
-                Planets::Planet::DeleteElement(planets, size);
-                break;
-            }
-            case Tasks::Edit: {
-                Planets::Planet::EditDB(planets, size);
-                break;
-            }
-            case Tasks::Print: {
-                Planets::Planet::PrintDB(planets, size);
-                break;
-            }
-            case Tasks::Exit: {
-                Planets::Planet::DeleteDB(planets, size);
-                return;
-            }
-            default: {
-                std::cout << "Введен неверный номер задачи." << std::endl;
-                break;
-            }
-        }
-    }
+void ExecuteApp(){
+    // ввод дроби с клавиатуры
+    std::cout << "Введите дробь: \n";
+    Fractions::Fraction z;
+    std::cin >> z;
+    std::cout << "z=" << z << std::endl;
+    // проверка конструкторов
+    Fractions::Fraction fr1(10, 14), fr2;
+    std::cout << "fr2=" << fr2 << std::endl;
+    std::cout << "fr1=" << fr1 << std::endl;
+    Fractions::Fraction fr = "-1 4/8";
+    std::cout << "fr=" << fr << std::endl;
+    Fractions::Fraction x(z), y;
+    std::cout << "x=" << x << std::endl;
+    double dbl = -1.25;
+    Fractions::Fraction f = dbl;
+    std::cout << "f=" << f << std::endl;
+    // проверка перегруженной операции "+"
+    y = x + z;
+    std::cout << "y=" << y << std::endl;
+    y += x;
+    f += dbl / 2;
+    std::cout << "f=" << f << std::endl;
+    y = x + dbl;
+    std::cout << "y=" << y << std::endl;
+    y = dbl + y;
+    std::cout << "y=" << y << std::endl;
+    y += dbl;
+    std::cout << "y=" << y << std::endl;
+    int i = 5;
+    y += i;
+    std::cout << "y=" << y << std::endl;
+    y = i + x;
+    std::cout << "y=" << y << std::endl;
+    y = x + i;
+    std::cout << "y=" << y << std::endl;
+    y += dbl + i + x;
+    std::cout << "y=" << y << std::endl;
 }
-void ExecuteDebatsApp() {
-    int task{};
-
-    int size = 1;
-    Candidats::Candidat* Candidats = new Candidats::Candidat[size]();
-
-    while (true) {
-        std::cout << "Выберите номер, интересующего вас задания, и введите его в консоль для перехода\n";
-        std::cout << "1. Чтение БД из файла\n";
-        std::cout << "2. Запись БД в файл\n";
-        std::cout << "3. Сортировка БД\n";
-        std::cout << "4. Добавление нового объекта в БД\n";
-        std::cout << "5. Удаление объекта из БД\n";
-        std::cout << "6. Редактирование БД\n";
-        std::cout << "7. Вывод БД на экран\n";
-        std::cout << "0. Выход\n";
-        std::cin >> task;
-        std::cout << std::endl;
-
-        switch (static_cast<Tasks>(task)) {
-            case Tasks::Read: {
-                Candidats::Candidat::ReadDB(Candidats, size);
-                break;
-            }
-            case Tasks::Write: {
-                Candidats::Candidat::WriteDB(Candidats, size);
-                break;
-            }
-            case Tasks::Sort: {
-                Candidats::Candidat::SortDB(Candidats, 0, size - 1);
-                break;
-            }
-            case Tasks::Add: {
-                Candidats::Candidat::AddElement(Candidats, size);
-                break;
-            }
-            case Tasks::Delete: {
-                Candidats::Candidat::DeleteElement(Candidats, size);
-                break;
-            }
-            case Tasks::Edit: {
-                Candidats::Candidat::EditDB(Candidats, size);
-                break;
-            }
-            case Tasks::Print: {
-                Candidats::Candidat::PrintDB(Candidats, size);
-                break;
-            }
-            case Tasks::Exit: {
-                Candidats::Candidat::DeleteDB(Candidats, size);
-                return;
-            }
-            default: {
-                std::cout << "Введен неверный номер задачи." << std::endl;
-                break;
-            }
-        }
-    }
 }
-
-void ExecuteApp() {
-    int task{};
-    while (true) {
-        std::cout << "Выберите режим работы: с планетами (1), с кандидатами (2), выход (0): ";
-        std::cin >> task;
-        std::cout << std::endl;
-        switch (static_cast<AppTasks>(task)) {
-            case AppTasks::Planets:
-                ExecutePlanetsApp();
-                break;
-            case AppTasks::Debats:
-                ExecuteDebatsApp();
-                break;
-            case AppTasks::Exit:
-                return;
-            default:
-                std::cout << "Введен неверный номер режима работы." << std::endl;
-                break;
-        }
-    }
-}
-}  // namespace Executor
