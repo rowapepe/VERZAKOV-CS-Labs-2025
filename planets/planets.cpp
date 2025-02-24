@@ -319,13 +319,13 @@ void Planet::PrintDB(Planet*& planets, int size) {
     for (int i = 0; i < size; ++i) {
         l = "нет";
 
-        if (planets[i].GetLife()) {
+        if (planets[i].life) {
             l = "есть";
         }
-        std::cout << "Название планеты: " << planets[i].GetName() << '\n'
-                  << "Диаметр: " << planets[i].GetDiameter() << '\n'
+        std::cout << "Название планеты: " << planets[i].name << '\n'
+                  << "Диаметр: " << planets[i].diameter << '\n'
                   << "Жизнь: " << l << '\n'
-                  << "Количество спутников: " << planets[i].GetSatellitesNumber() << '\n'
+                  << "Количество спутников: " << planets[i].satellitesNumber << '\n'
                   << '\n';
     }
 }

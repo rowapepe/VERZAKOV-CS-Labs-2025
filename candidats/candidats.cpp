@@ -335,13 +335,13 @@ void Candidat::PrintDB(Candidat*& candidats, int size) {
     for (int i = 0; i < size; ++i) {
         m = "женский";
 
-        if (candidats[i].GetMale()) {
+        if (candidats[i].male) {
             m = "мужской";
         }
-        std::cout << "Имя кандидата: " << candidats[i].GetName() << '\n'
+        std::cout << "Имя кандидата: " << candidats[i].name << '\n'
                   << "Пол: " << m << '\n'
-                  << "Регион: " << candidats[i].GetRegion() << '\n'
-                  << "Количество голосов: " << candidats[i].GetVotesNumber() << '\n'
+                  << "Регион: " << candidats[i].region << '\n'
+                  << "Количество голосов: " << candidats[i].votesNumber << '\n'
                   << '\n';
     }
 }
