@@ -10,7 +10,7 @@ class Fraction {
 
  public:
     Fraction(int num = 0, int denom = 1);
-    Fraction(char* str);
+    Fraction(const char* str);
     Fraction(double value);
 
     void SetNumerator(int num);

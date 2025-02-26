@@ -12,5 +12,3 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 target_include_directories(${PROJECT_NAME} PUBLIC fractions)
 target_link_libraries(${PROJECT_NAME} fractions)
-
-link_directories(${CMAKE_SOURCE_DIR})

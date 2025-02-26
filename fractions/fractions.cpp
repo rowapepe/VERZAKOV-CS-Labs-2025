@@ -34,8 +34,7 @@ Fraction& Fraction::Reduct() {
 
 Fraction::Fraction(int num, int denom) {
     if (denom == 0) {
-        std::cout << "Делитель не может равняться 0.";
-        return;
+        throw std::invalid_argument("Делитель не может равняться 0.");
     }
 
     numerator = num;
@@ -43,50 +42,52 @@ Fraction::Fraction(int num, int denom) {
     Reduct();
 }
 
-Fraction::Fraction(char* str) {
+Fraction::Fraction(const char* str) {
     int integerPart = 0;
     int num = 0;
     int denom = 1;
-    int sign = str[0] == '-' ? -1 : 1;
+    int sign = (str[0] == '-') ? -1 : 1;
 
     char buffer[kBufferSize]{};
-    char* number{};
-    strncpy(buffer, str, kBufferSize);
+    strncpy(buffer, str, kBufferSize - 1);
 
-    if (strchr(buffer, ' ')) {
-        number = std::strtok(buffer, " ");
-        integerPart = std::atoi(number);
+    char* number = strtok(buffer, " /");
 
-        number = std::strtok(nullptr, "/");
-        num = std::atoi(number);
-
-        number = std::strtok(nullptr, "");
-        denom = std::atoi(number);
-
-        numerator = abs(integerPart) * denom + num;
-    } else if (strchr(buffer, '/')) {
-        number = std::strtok(buffer, "/");
-        num = std::atoi(number);
-
-        number = std::strtok(nullptr, "");
-        denom = std::atoi(number);
-
-        numerator = num;
-    } else {
-        numerator = std::atoi(buffer);
+    int numberCount = 0;
+    while (number) {
+        numberCount++;
+        if (numberCount == 1) {
+            integerPart = std::atoi(number);
+        } else if (numberCount == 2) {
+            num = std::atoi(number);
+        } else if (numberCount == 3) {
+            denom = std::atoi(number);
+        }
+        number = strtok(nullptr, " /");
     }
 
-    numerator = sign * numerator;
+    if (numberCount == 3) {
+        numerator = abs(integerPart) * denom + num;
+    } else if (numberCount == 2) {
+        numerator = integerPart;
+        denom = num;
+    } else if (numberCount == 1) {
+        numerator = integerPart;
+        denom = 1;
+    } else {
+        throw std::invalid_argument("Введен некорректный формат.");
+    }
 
     if (denom == 0) {
-        std::cout << "Делитель не может равняться 0." << std::endl;
-        return;
+        throw std::invalid_argument("Делитель не может равняться 0.");
     }
 
+    numerator *= sign;
     denominator = denom;
 
     Reduct();
 }
+
 
 Fraction::Fraction(double value) {
     double integerPart{};
@@ -106,8 +107,7 @@ void Fraction::SetNumerator(int num) {
 
 void Fraction::SetDenominator(int denom) {
     if (denom == 0) {
-        std::cout << "Делитель не может равняться 0." << std::endl;
-        return;
+        throw std::invalid_argument("Делитель не может равняться 0.");
     }
 
     denominator = denom;
