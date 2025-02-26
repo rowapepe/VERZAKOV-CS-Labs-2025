@@ -57,7 +57,7 @@ void ExecutePlanetsApp() {
                 break;
             }
             case Tasks::Exit: {
-                Planets::Planet::DeleteDB(planets, size);
+                Planets::Planet::DeleteDB(planets);
                 return;
             }
             default: {

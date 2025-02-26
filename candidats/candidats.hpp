@@ -34,7 +34,7 @@ class Candidat {
     bool operator<(const char* n);
 
     static void Resize(Candidat*& candidats, int& size);
-    static void DeleteDB(Candidat*& candidats, int size);
+    static void DeleteDB(Candidat*& candidats);
 
     static void ReadDB(Candidat*& candidats, int& size);
     static void WriteDB(Candidat*& candidats, int size);

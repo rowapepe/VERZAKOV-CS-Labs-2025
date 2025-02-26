@@ -99,21 +99,12 @@ Planet& Planet::operator=(const Planet& other) {
 }
 
 std::ofstream& operator<<(std::ofstream& file, Planet& planet) {
-    file << planet.GetName() << " " << planet.GetDiameter() << " " << planet.GetLife() << " " << planet.GetSatellitesNumber() << std::endl;
+    file << planet.name << " " << planet.diameter << " " << planet.life << " " << planet.satellitesNumber << std::endl;
     return file;
 }
 
 std::ifstream& operator>>(std::ifstream& file, Planet& planet) {
-    char n[kBuffSize]{};
-    int d{};
-    bool l{};
-    int sn{};
-
-    file >> n >> d >> l >> sn;
-    planet.SetName(n);
-    planet.SetDiameter(d);
-    planet.SetLife(l);
-    planet.SetSatellitesNumber(sn);
+    file >> planet.name >> planet.diameter >> planet.life >> planet.satellitesNumber;
 
     return file;
 }
@@ -149,12 +140,12 @@ void Planet::Resize(Planet*& planets, int& size) {
         newPlanets[i] = planets[i];
     }
 
-    DeleteDB(planets, size);
+    DeleteDB(planets);
     planets = newPlanets;
     ++size;
 }
 
-void Planet::DeleteDB(Planet*& planets, int size) {
+void Planet::DeleteDB(Planet*& planets) {
     if (!planets) {
         return;
     }
@@ -229,19 +220,9 @@ void Planet::AddElement(Planet*& planets, int& size) {
 
     Resize(planets, size);
 
-    char n[kBuffSize]{};
-    int d{};
-    bool l{};
-    int sn{};
-
     std::cout << "Введите название планеты, диаметр, жизнь (есть - 1, нет - 0), количество спутников: ";
-    std::cin >> n >> d >> l >> sn;
+    std::cin >> planets[size-1].name >> planets[size-1].diameter >> planets[size-1].life >> planets[size-1].satellitesNumber;
     std::cout << std::endl;
-
-    planets[size - 1].SetName(n);
-    planets[size - 1].SetDiameter(d);
-    planets[size - 1].SetLife(l);
-    planets[size - 1].SetSatellitesNumber(sn);
 }
 
 void Planet::DeleteElement(Planet*& planets, int& size) {
@@ -271,7 +252,7 @@ void Planet::DeleteElement(Planet*& planets, int& size) {
         newPlanets[j++] = planets[i];
     }
 
-    DeleteDB(planets, size);
+    DeleteDB(planets);
     planets = newPlanets;
     --size;
 }
@@ -295,18 +276,9 @@ void Planet::EditDB(Planet*& planets, int size) {
         return;
     }
 
-    char n[kBuffSize]{};
-    int d{};
-    bool l{};
-    int sn{};
-
     std::cout << "Введите измененные название планеты, диаметр, наличие жизни (есть - 1, нет - 0), количество спутников: ";
-    std::cin >> n >> d >> l >> sn;
+    std::cin >> planets[point].name >> planets[point].diameter >> planets[point].life >> planets[point].satellitesNumber;
     std::cout << std::endl;
-    planets[point].SetName(n);
-    planets[point].SetDiameter(d);
-    planets[point].SetLife(l);
-    planets[point].SetSatellitesNumber(sn);
 }
 
 void Planet::PrintDB(Planet*& planets, int size) {

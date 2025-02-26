@@ -34,7 +34,7 @@ class Planet {
     bool operator<(const char* n);
 
     static void Resize(Planet*& planets, int& size);
-    static void DeleteDB(Planet*& planets, int size);
+    static void DeleteDB(Planet*& planets);
 
     static void ReadDB(Planet*& planets, int& size);
     static void WriteDB(Planet*& planets, int size);

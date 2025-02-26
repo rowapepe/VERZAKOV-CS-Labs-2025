@@ -115,21 +115,12 @@ Candidat& Candidat::operator=(const Candidat& other) {
 }
 
 std::ofstream& operator<<(std::ofstream& file, Candidat& candidat) {
-    file << candidat.GetName() << " " << candidat.GetMale() << " " << candidat.GetRegion() << " " << candidat.GetVotesNumber() << std::endl;
+    file << candidat.name << " " << candidat.male << " " << candidat.region << " " << candidat.votesNumber << std::endl;
     return file;
 }
 
 std::ifstream& operator>>(std::ifstream& file, Candidat& candidat) {
-    char n[kBuffSize]{};
-    bool m{};
-    char r[kBuffSize]{};
-    int vn{};
-
-    file >> n >> m >> r >> vn;
-    candidat.SetName(n);
-    candidat.SetMale(m);
-    candidat.SetRegion(r);
-    candidat.SetVotesNumber(vn);
+    file >> candidat.name >> candidat.male >> candidat.region >> candidat.votesNumber;
 
     return file;
 }
@@ -165,12 +156,12 @@ void Candidat::Resize(Candidat*& candidats, int& size) {
         newCandidats[i] = candidats[i];
     }
 
-    DeleteDB(candidats, size);
+    DeleteDB(candidats);
     candidats = newCandidats;
     ++size;
 }
 
-void Candidat::DeleteDB(Candidat*& candidats, int size) {
+void Candidat::DeleteDB(Candidat*& candidats) {
     if (!candidats) {
         return;
     }
@@ -245,19 +236,9 @@ void Candidat::AddElement(Candidat*& candidats, int& size) {
 
     Resize(candidats, size);
 
-    char n[kBuffSize]{};
-    bool m{};
-    char r[kBuffSize]{};
-    int vn{};
-
     std::cout << "Введите имя кандидата, пол (мужской - 1, женский - 0), регион, количество голосов: ";
-    std::cin >> n >> m >> r >> vn;
+    std::cin >> candidats[size - 1].name >> candidats[size - 1].male >> candidats[size - 1].region >> candidats[size - 1].votesNumber;
     std::cout << std::endl;
-
-    candidats[size - 1].SetName(n);
-    candidats[size - 1].SetMale(m);
-    candidats[size - 1].SetRegion(r);
-    candidats[size - 1].SetVotesNumber(vn);
 }
 
 void Candidat::DeleteElement(Candidat*& candidats, int& size) {
@@ -287,7 +268,7 @@ void Candidat::DeleteElement(Candidat*& candidats, int& size) {
         newCandidats[j++] = candidats[i];
     }
 
-    DeleteDB(candidats, size);
+    DeleteDB(candidats);
     candidats = newCandidats;
     --size;
 }
@@ -311,18 +292,9 @@ void Candidat::EditDB(Candidat*& сandidats, int size) {
         return;
     }
 
-    char n[kBuffSize]{};
-    bool m{};
-    char r[kBuffSize]{};
-    int vn{};
-
     std::cout << "Введите измененные имя кандидата, пол (мужской - 1, женский - 0), регион, количество голосов: ";
-    std::cin >> n >> m >> r >> vn;
+    std::cin >> сandidats[point].name >> сandidats[point].male >> сandidats[point].region >> сandidats[point].votesNumber;
     std::cout << std::endl;
-    сandidats[point].SetName(n);
-    сandidats[point].SetMale(m);
-    сandidats[point].SetRegion(r);
-    сandidats[point].SetVotesNumber(vn);
 }
 
 void Candidat::PrintDB(Candidat*& candidats, int size) {
