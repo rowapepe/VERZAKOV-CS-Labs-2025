@@ -252,7 +252,7 @@ void Planet::DeleteElement(Planet*& planets, int& size) {
         }
         newPlanets[j++] = planets[i];
     }
- 
+
     DeleteDB(planets);
     planets = newPlanets;
     --size;
