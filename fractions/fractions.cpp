@@ -88,7 +88,6 @@ Fraction::Fraction(const char* str) {
     Reduct();
 }
 
-
 Fraction::Fraction(double value) {
     double integerPart{};
     double fractionPart = std::modf(value, &integerPart);
@@ -113,11 +112,11 @@ void Fraction::SetDenominator(int denom) {
     denominator = denom;
 }
 
-const int Fraction::GetNumerator() {
+int Fraction::GetNumerator() const {
     return numerator;
 }
 
-const int Fraction::GetDenominator() {
+int Fraction::GetDenominator() const {
     return denominator;
 }
 
