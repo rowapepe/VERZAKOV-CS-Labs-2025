@@ -1,34 +1,29 @@
-// Файл MyStack.h
-// Шаблонный класс MyStack на основе односвязного списка.
 #pragma once
 
 namespace MyStack {
-// Шаблонный класс ListNode (узел односвязного списка)
 template<class INF, class FRIEND>
-class ListNode  // узел списка
-{
+class ListNode {
  private:
-    INF d;                              // информационная часть узла
-    ListNode* next;                     // указатель на следующий узел списка
-    ListNode(void) { next = nullptr; }  // конструктор
+    INF d;
+    ListNode* next;
+    ListNode(void) { next = nullptr; }
     friend FRIEND;
 };
 
-// Шаблонный класс MyStack на основе односвязного списка.
 template<class INF>
 class MyStack {
     typedef class ListNode<INF, MyStack<INF>> Node;
     Node* top;
 
  public:
-    MyStack(void);                       // конструктор
-    MyStack(const MyStack<INF>& other);  // конструктор копирования
-    ~MyStack(void);                      // освободить динамическую память
+    MyStack(void);
+    MyStack(const MyStack<INF>& other);
+    ~MyStack(void);
     MyStack<INF>& operator=(const MyStack<INF>& other);
-    bool empty(void);   // стек пустой?
-    bool push(INF n);   // добавить узел в вершину стека
-    bool pop(void);     // удалить узел из вершины стека
-    INF top_inf(void);  // считать информацию из вершины стека
+    bool empty(void) const;
+    bool push(INF n);
+    bool pop(void);
+    INF top_inf(void) const;
     static void Multipliers(int n, MyStack<INF>& stack, bool reversed);
 };
 }  // namespace MyStack

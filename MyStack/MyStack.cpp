@@ -7,23 +7,27 @@ MyStack<INF>::MyStack(void) : top(nullptr) {
 }
 
 template<class INF>
-MyStack<INF>::MyStack(const MyStack<INF>& other) {
-    top = nullptr;
+MyStack<INF>::MyStack(const MyStack<INF>& other) : top(nullptr) {
     if (other.empty()) {
         throw std::runtime_error("Стек пустой, копирование невозможно.");
     }
 
-    MyStack<INF> reversedStack;
-
     Node* current = other.top;
-    while (current) {
-        reversedStack.push(current->d);
-        current = current->next;
-    }
+    Node* prev = nullptr;
 
-    while (!reversedStack.empty()) {
-        push(reversedStack.top_inf());
-        reversedStack.pop();
+    while (current) {
+        Node* newNode = new Node;
+        newNode->d = current->d;
+        newNode->next = nullptr;
+
+        if (!top) {
+            top = newNode;
+        } else {
+            prev->next = newNode;
+        }
+
+        prev = newNode;
+        current = current->next;
     }
 }
 
@@ -36,6 +40,10 @@ MyStack<INF>::~MyStack(void) {
 
 template<class INF>
 MyStack<INF>& MyStack<INF>::operator=(const MyStack<INF>& other) {
+    if (other.empty()) {
+        throw std::runtime_error("Стек пустой, копирование невозможно.");
+    }
+
     if (this == &other) {
         return *this;
     }
@@ -44,28 +52,29 @@ MyStack<INF>& MyStack<INF>::operator=(const MyStack<INF>& other) {
         pop();
     }
 
-    if (other.empty()) {
-        return *this;
-    }
-
-    MyStack<INF> reversedStack;
-
     Node* current = other.top;
-    while (current) {
-        reversedStack.push(current->d);
-        current = current->next;
-    }
+    Node* prevNew = nullptr;
 
-    while (!reversedStack.empty()) {
-        push(reversedStack.top_inf());
-        reversedStack.pop();
+    while (current) {
+        Node* newNode = new Node;
+        newNode->d = current->d;
+        newNode->next = nullptr;
+
+        if (!top) {
+            top = newNode;
+        } else {
+            prevNew->next = newNode;
+        }
+
+        prevNew = newNode;
+        current = current->next;
     }
 
     return *this;
 }
 
 template<class INF>
-bool MyStack<INF>::empty(void) {
+bool MyStack<INF>::empty(void) const {
     return top == nullptr;
 }
 
@@ -92,7 +101,7 @@ bool MyStack<INF>::pop(void) {
 }
 
 template<class INF>
-INF MyStack<INF>::top_inf(void) {
+INF MyStack<INF>::top_inf(void) const {
     if (empty()) {
         throw std::runtime_error("Стек пустой.");
     }
@@ -103,7 +112,7 @@ INF MyStack<INF>::top_inf(void) {
 template<class INF>
 void MyStack<INF>::Multipliers(int n, MyStack<INF>& stack, bool reversed) {
     if (n <= 0) {
-        throw std::invalid_argument("Число N не валидно.");
+        throw std::invalid_argument("Число N невалидно.");
     }
 
     MyStack<INF> tempStack;

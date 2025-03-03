@@ -23,7 +23,6 @@ void ExecuteApp() {
     int N{};
     std::cout << "Введите целое число N для разложения на простые множители: ";
     std::cin >> N;
-    std::cout << std::endl;
 
     PrintDivisors(N, false);
     PrintDivisors(N, true);
