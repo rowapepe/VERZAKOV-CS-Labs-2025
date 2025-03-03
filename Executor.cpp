@@ -1,6 +1,6 @@
 #include "Executor.hpp"
 #include <iostream>
-#include "candidats.hpp"
+#include "candidats/candidats.hpp"
 #include "planets/planets.hpp"
 
 namespace {
@@ -116,7 +116,7 @@ void ExecuteDebatsApp() {
                 break;
             }
             case Tasks::Exit: {
-                Candidats::Candidat::DeleteDB(Candidats, size);
+                Candidats::Candidat::DeleteDB(Candidats);
                 return;
             }
             default: {

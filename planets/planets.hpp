@@ -1,6 +1,6 @@
 #pragma once
 #include <cstddef>
-#include <fstream>
+#include <iostream>
 
 namespace Planets {
 class Planet {
@@ -21,16 +21,16 @@ class Planet {
     void SetLife(bool l);
     void SetSatellitesNumber(int sn);
 
-    char* GetName();
-    int GetDiameter();
-    bool GetLife();
-    int GetSatellitesNumber();
+    const char* GetName() const;
+    int GetDiameter() const;
+    bool GetLife() const;
+    int GetSatellitesNumber() const;
 
     Planet& operator=(const Planet& other);
-    friend std::ofstream& operator<<(std::ofstream& file, Planet& planet);
-    friend std::ifstream& operator>>(std::ifstream& file, Planet& planet);
+    friend std::ostream& operator<<(std::ostream& os, const Planet& planet);
+    friend std::istream& operator>>(std::istream& is, Planet& planet);
     bool operator==(const char* n);
-    bool operator<(Planet& planet2);
+    bool operator<(const Planet& planet2);
     bool operator<(const char* n);
 
     static void Resize(Planet*& planets, int& size);

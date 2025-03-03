@@ -1,6 +1,6 @@
 #pragma once
 #include <cstddef>
-#include <fstream>
+#include <iostream>
 
 namespace Candidats {
 class Candidat {
@@ -21,16 +21,16 @@ class Candidat {
     void SetRegion(const char* r);
     void SetVotesNumber(int vn);
 
-    char* GetName();
-    bool GetMale();
-    char* GetRegion();
-    int GetVotesNumber();
+    const char* GetName() const;
+    bool GetMale() const;
+    const char* GetRegion() const;
+    int GetVotesNumber() const;
 
     Candidat& operator=(const Candidat& other);
-    friend std::ofstream& operator<<(std::ofstream& file, Candidat& candidat);
-    friend std::ifstream& operator>>(std::ifstream& file, Candidat& candidat);
+    friend std::ostream& operator<<(std::ostream& os, const Candidat& candidat);
+    friend std::istream& operator>>(std::istream& is, Candidat& candidat);
     bool operator==(const char* n);
-    bool operator<(Candidat& candidat2);
+    bool operator<(const Candidat& candidat2);
     bool operator<(const char* n);
 
     static void Resize(Candidat*& candidats, int& size);

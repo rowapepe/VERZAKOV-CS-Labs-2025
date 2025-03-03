@@ -78,19 +78,19 @@ void Candidat::SetVotesNumber(int vn) {
     votesNumber = vn;
 }
 
-char* Candidat::GetName() {
+const char* Candidat::GetName() const{
     return name;
 }
 
-bool Candidat::GetMale() {
+bool Candidat::GetMale() const{
     return male;
 }
 
-char* Candidat::GetRegion() {
+const char* Candidat::GetRegion() const{
     return region;
 }
 
-int Candidat::GetVotesNumber() {
+int Candidat::GetVotesNumber() const{
     return votesNumber;
 }
 
@@ -114,27 +114,27 @@ Candidat& Candidat::operator=(const Candidat& other) {
     return *this;
 }
 
-std::ofstream& operator<<(std::ofstream& file, Candidat& candidat) {
-    file << candidat.name << " " << candidat.male << " " << candidat.region << " " << candidat.votesNumber << std::endl;
-    return file;
+std::ostream& operator<<(std::ostream& os, const Candidat& candidat) {
+    os << candidat.name << " " << candidat.male << " " << candidat.region << " " << candidat.votesNumber << std::endl;
+    return os;
 }
 
-std::ifstream& operator>>(std::ifstream& file, Candidat& candidat) {
-    file >> candidat.name >> candidat.male >> candidat.region >> candidat.votesNumber;
+std::istream& operator>>(std::istream& is, Candidat& candidat) {
+    is >> candidat.name >> candidat.male >> candidat.region >> candidat.votesNumber;
 
-    return file;
+    return is;
 }
 
 bool Candidat::operator==(const char* n) {
-    if (strcmp(this->GetName(), n) == 0) {
+    if (strcmp(this->name, n) == 0) {
         return true;
     } else {
         return false;
     }
 }
 
-bool Candidat::operator<(Candidat& сandidat2) {
-    if (strcmp(this->GetName(), сandidat2.GetName()) < 0) {
+bool Candidat::operator<(const Candidat& сandidat2) {
+    if (strcmp(this->name, сandidat2.name) < 0) {
         return true;
     } else {
         return false;
@@ -142,7 +142,7 @@ bool Candidat::operator<(Candidat& сandidat2) {
 }
 
 bool Candidat::operator<(const char* n) {
-    if (strcmp(this->GetName(), n) < 0) {
+    if (strcmp(this->name, n) < 0) {
         return true;
     } else {
         return false;
@@ -237,7 +237,7 @@ void Candidat::AddElement(Candidat*& candidats, int& size) {
     Resize(candidats, size);
 
     std::cout << "Введите имя кандидата, пол (мужской - 1, женский - 0), регион, количество голосов: ";
-    std::cin >> candidats[size - 1].name >> candidats[size - 1].male >> candidats[size - 1].region >> candidats[size - 1].votesNumber;
+    std::cin >> candidats[size - 1];
     std::cout << std::endl;
 }
 
@@ -293,7 +293,7 @@ void Candidat::EditDB(Candidat*& сandidats, int size) {
     }
 
     std::cout << "Введите измененные имя кандидата, пол (мужской - 1, женский - 0), регион, количество голосов: ";
-    std::cin >> сandidats[point].name >> сandidats[point].male >> сandidats[point].region >> сandidats[point].votesNumber;
+    std::cin >> сandidats[point];
     std::cout << std::endl;
 }
 

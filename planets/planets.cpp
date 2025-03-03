@@ -66,19 +66,19 @@ void Planet::SetSatellitesNumber(int sn) {
     satellitesNumber = sn;
 }
 
-char* Planet::GetName() {
+const char* Planet::GetName() const {
     return name;
 }
 
-int Planet::GetDiameter() {
+int Planet::GetDiameter() const {
     return diameter;
 }
 
-bool Planet::GetLife() {
+bool Planet::GetLife() const {
     return life;
 }
 
-int Planet::GetSatellitesNumber() {
+int Planet::GetSatellitesNumber() const {
     return satellitesNumber;
 }
 
@@ -98,27 +98,28 @@ Planet& Planet::operator=(const Planet& other) {
     return *this;
 }
 
-std::ofstream& operator<<(std::ofstream& file, Planet& planet) {
-    file << planet.name << " " << planet.diameter << " " << planet.life << " " << planet.satellitesNumber << std::endl;
-    return file;
+std::ostream& operator<<(std::ostream& os, const Planet& planet) {
+    os << planet.name << " " << planet.diameter << " " << planet.life << " " << planet.satellitesNumber << std::endl;
+
+    return os;
 }
 
-std::ifstream& operator>>(std::ifstream& file, Planet& planet) {
-    file >> planet.name >> planet.diameter >> planet.life >> planet.satellitesNumber;
+std::istream& operator>>(std::istream& is, Planet& planet) {
+    is >> planet.name >> planet.diameter >> planet.life >> planet.satellitesNumber;
 
-    return file;
+    return is;
 }
 
 bool Planet::operator==(const char* n) {
-    if (strcmp(this->GetName(), n) == 0) {
+    if (strcmp(this->name, n) == 0) {
         return true;
     } else {
         return false;
     }
 }
 
-bool Planet::operator<(Planet& planet2) {
-    if (strcmp(this->GetName(), planet2.GetName()) < 0) {
+bool Planet::operator<(const Planet& planet2) {
+    if (strcmp(this->name, planet2.name) < 0) {
         return true;
     } else {
         return false;
@@ -126,7 +127,7 @@ bool Planet::operator<(Planet& planet2) {
 }
 
 bool Planet::operator<(const char* n) {
-    if (strcmp(this->GetName(), n) < 0) {
+    if (strcmp(this->name, n) < 0) {
         return true;
     } else {
         return false;
@@ -221,7 +222,7 @@ void Planet::AddElement(Planet*& planets, int& size) {
     Resize(planets, size);
 
     std::cout << "Введите название планеты, диаметр, жизнь (есть - 1, нет - 0), количество спутников: ";
-    std::cin >> planets[size-1].name >> planets[size-1].diameter >> planets[size-1].life >> planets[size-1].satellitesNumber;
+    std::cin >> planets[size - 1];
     std::cout << std::endl;
 }
 
@@ -251,7 +252,7 @@ void Planet::DeleteElement(Planet*& planets, int& size) {
         }
         newPlanets[j++] = planets[i];
     }
-
+ 
     DeleteDB(planets);
     planets = newPlanets;
     --size;
@@ -277,7 +278,7 @@ void Planet::EditDB(Planet*& planets, int size) {
     }
 
     std::cout << "Введите измененные название планеты, диаметр, наличие жизни (есть - 1, нет - 0), количество спутников: ";
-    std::cin >> planets[point].name >> planets[point].diameter >> planets[point].life >> planets[point].satellitesNumber;
+    std::cin >> planets[point];
     std::cout << std::endl;
 }
 
