@@ -21,12 +21,14 @@ class MyStack {
     Node* top;
 
  public:
-    MyStack(void);      // конструктор
-    ~MyStack(void);     // освободить динамическую память
+    MyStack(void);                       // конструктор
+    MyStack(const MyStack<INF>& other);  // конструктор копирования
+    ~MyStack(void);                      // освободить динамическую память
+    MyStack<INF>& operator=(const MyStack<INF>& other);
     bool empty(void);   // стек пустой?
     bool push(INF n);   // добавить узел в вершину стека
     bool pop(void);     // удалить узел из вершины стека
     INF top_inf(void);  // считать информацию из вершины стека
-    static void Multipliers(int n, MyStack<INF>& stack);
+    static void Multipliers(int n, MyStack<INF>& stack, bool reversed);
 };
 }  // namespace MyStack
