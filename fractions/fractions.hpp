@@ -21,8 +21,8 @@ class Fraction {
 
     Fraction& Reduct();
 
-    friend std::ostream& operator<<(std::ostream& os, const Fraction& frac);
-    friend std::istream& operator>>(std::istream& is, const Fraction& frac);
+    friend std::ostream& operator<<(std::ostream& os, Fraction& frac);
+    friend std::istream& operator>>(std::istream& is, Fraction& frac);
 
     Fraction operator+(int value);
     friend Fraction operator+(int value, const Fraction& frac);
