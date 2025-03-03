@@ -3,22 +3,19 @@
 
 namespace MyStack {
 template<class INF>
-MyStack<INF>::MyStack(void) : top(nullptr){}
+MyStack<INF>::MyStack(void) : top(nullptr) {
+}
 
 template<class INF>
 MyStack<INF>::~MyStack(void) {
-    while (!empty) {
+    while (!empty()) {
         pop();
     }
 }
 
 template<class INF>
 bool MyStack<INF>::empty(void) {
-    if (top) {
-        return true;
-    } else {
-        return false;
-    }
+    return top == nullptr;
 }
 
 template<class INF>
@@ -32,7 +29,7 @@ bool MyStack<INF>::push(INF n) {
 
 template<class INF>
 bool MyStack<INF>::pop(void) {
-    if (empty) {
+    if (empty()) {
         return false;
     }
     Node* temp = top;
@@ -57,4 +54,6 @@ void MyStack<INF>::Multipliers(int n, MyStack<INF>& stack) {
         }
     }
 }
+
+template class MyStack<int>;
 }  // namespace MyStack

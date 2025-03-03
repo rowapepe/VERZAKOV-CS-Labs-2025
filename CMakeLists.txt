@@ -5,7 +5,7 @@ project(lab4)
 set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCES main.cpp Executor.cpp)
-set(HEADERS Executor.cpp)
+set(HEADERS Executor.hpp)
 
 add_subdirectory(MyStack)
 
