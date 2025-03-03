@@ -1,6 +1,7 @@
 // Файл MyStack.h
 // Шаблонный класс MyStack на основе односвязного списка.
 #pragma once
+
 namespace MyStack {
 // Шаблонный класс ListNode (узел односвязного списка)
 template<class INF, class FRIEND>
@@ -26,6 +27,6 @@ class MyStack {
     bool push(INF n);   // добавить узел в вершину стека
     bool pop(void);     // удалить узел из вершины стека
     INF top_inf(void);  // считать информацию из вершины стека
-    void Multipliers(int n, MyStack<DATA>& stack);
+    static void Multipliers(int n, MyStack<INF>& stack);
 };
 }  // namespace MyStack
