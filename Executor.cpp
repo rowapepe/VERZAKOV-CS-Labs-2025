@@ -8,15 +8,7 @@ void PrintDivisors(int N, bool reversed) {
     divisors.Multipliers(N, divisors, reversed);
 
     std::cout << N << "=";
-    if (!divisors.empty()) {
-        std::cout << divisors.top_inf();
-        divisors.pop();
-    }
-    while (!divisors.empty()) {
-        std::cout << " * " << divisors.top_inf();
-        divisors.pop();
-    }
-    std::cout << std::endl;
+    std::cout << divisors;
 }
 
 void ExecuteApp() {
