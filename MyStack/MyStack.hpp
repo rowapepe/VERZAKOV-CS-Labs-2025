@@ -3,14 +3,23 @@
 #include <stdexcept>
 
 namespace MyStack {
+template<class INF>
+class MyStack;
+
 template<class INF, class FRIEND>
 class ListNode {
  private:
     INF d;
     ListNode* next;
     ListNode(void) { next = nullptr; }
+
     friend FRIEND;
+    template<class T>
+    friend std::ostream& operator<<(std::ostream& os, const MyStack<T>& stack);
 };
+
+template<class INF>
+std::ostream& operator<<(std::ostream& os, const MyStack<INF>& stack);
 
 template<class INF>
 class MyStack {
@@ -27,7 +36,9 @@ class MyStack {
     bool pop(void);
     INF top_inf(void) const;
     static void Multipliers(int n, MyStack<INF>& stack, bool reversed);
+    friend std::ostream& operator<< <>(std::ostream& out, const MyStack<INF>& stack);
 };
+
 template<class INF>
 MyStack<INF>::MyStack(void) : top(nullptr) {
 }
@@ -62,6 +73,23 @@ MyStack<INF>::~MyStack(void) {
     while (!empty()) {
         pop();
     }
+}
+
+template<class INF>
+std::ostream& operator<<(std::ostream& out, const MyStack<INF>& stack) {
+    if (!stack.top) {
+        throw std::runtime_error("Стек пустой, вывод невозможен.");
+    }
+
+    typename MyStack<INF>::Node* current = stack.top;
+    out << current->d;
+    current = current->next;
+    while (current) {
+        out << " * " << current->d;
+        current = current->next;
+    }
+    out << std::endl;
+    return out;
 }
 
 template<class INF>
@@ -110,7 +138,6 @@ bool MyStack<INF>::push(INF n) {
     newNode->d = n;
     newNode->next = top;
     top = newNode;
-
     return true;
 }
 
@@ -122,7 +149,6 @@ bool MyStack<INF>::pop(void) {
     Node* temp = top;
     top = top->next;
     delete temp;
-
     return true;
 }
 
@@ -131,7 +157,6 @@ INF MyStack<INF>::top_inf(void) const {
     if (empty()) {
         throw std::runtime_error("Стек пустой.");
     }
-
     return top->d;
 }
 
@@ -159,19 +184,5 @@ void MyStack<INF>::Multipliers(int n, MyStack<INF>& stack, bool reversed) {
     } else {
         stack = tempStack;
     }
-}
-
-template<class INF>
-std::ostream& operator<<(std::ostream& out, MyStack<INF>& stack) {
-    if (!stack.empty()) {
-        out << stack.top_inf();
-        stack.pop();
-    }
-    while (!stack.empty()) {
-        out << " * " << stack.top_inf();
-        stack.pop();
-    }
-    out << std::endl;
-    return out;
 }
 }  // namespace MyStack
