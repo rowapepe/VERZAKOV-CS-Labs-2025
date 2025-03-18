@@ -1,15 +1,18 @@
 cmake_minimum_required(VERSION 3.23)
 
-project(lab4)
+project(lab6)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCES main.cpp Executor.cpp)
-set(HEADERS Executor.hpp)
+set(SOURCES main.cpp)
 
-add_subdirectory(MyStack)
+add_subdirectory(Polynomial)
+add_subdirectory(Term)
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
-target_include_directories(${PROJECT_NAME} PUBLIC MyStack)
-target_link_libraries(${PROJECT_NAME} MyStack)
+target_include_directories(${PROJECT_NAME} PUBLIC Polynomial)
+target_link_libraries(${PROJECT_NAME} Term)
+
+target_include_directories(${PROJECT_NAME} PUBLIC Polynomial)
+target_link_libraries(${PROJECT_NAME} Term)
