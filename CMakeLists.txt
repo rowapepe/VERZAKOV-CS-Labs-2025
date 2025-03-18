@@ -1,15 +1,19 @@
 cmake_minimum_required(VERSION 3.23)
 
-project(lab4)
+set(project "lab5")
+project(${project})
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCES main.cpp Executor.cpp)
-set(HEADERS Executor.hpp)
+set(${project}_SOURCES
+        main.cpp)
 
-add_subdirectory(MyStack)
+add_subdirectory(containers)
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+set(${project}_SOURCE_LIST
+        ${${project}_SOURCES})
 
-target_include_directories(${PROJECT_NAME} PUBLIC MyStack)
-target_link_libraries(${PROJECT_NAME} MyStack)
+add_executable(${project}
+        ${${project}_SOURCE_LIST})
+
+target_link_libraries(${project} containers)
