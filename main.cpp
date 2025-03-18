@@ -1,12 +1,8 @@
-#include "Executor.hpp"
+#include "Polynomial/polynomial.hpp"
+#include "Term/term.hpp"
 #include <iostream>
 
 int main() {
-    try {
-        Executor::ExecuteApp();
-    } catch (const std::exception& e) {
-        std::cout << "Ошибка: " << e.what() << std::endl;
-    }
 
     return 0;
 }
