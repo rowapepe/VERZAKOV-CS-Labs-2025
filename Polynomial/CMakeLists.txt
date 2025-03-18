@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.23)
 
-project(MyStack)
+project(Polynomial)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCES MyStack.cpp)
-set(HEADERS MyStack.hpp)
+set(SOURCES polynomial.cpp)
+set(HEADERS polynomial.hpp)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 
