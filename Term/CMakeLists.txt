@@ -4,8 +4,8 @@ project(Term)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCES Term.cpp)
-set(HEADERS Term.hpp)
+set(SOURCES term.cpp)
+set(HEADERS term.hpp)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 

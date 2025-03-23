@@ -12,7 +12,7 @@ add_subdirectory(Term)
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 target_include_directories(${PROJECT_NAME} PUBLIC Polynomial)
-target_link_libraries(${PROJECT_NAME} Term)
+target_link_libraries(${PROJECT_NAME} Polynomial)
 
-target_include_directories(${PROJECT_NAME} PUBLIC Polynomial)
+target_include_directories(${PROJECT_NAME} PUBLIC Term)
 target_link_libraries(${PROJECT_NAME} Term)
