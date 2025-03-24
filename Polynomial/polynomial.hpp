@@ -155,13 +155,13 @@ std::istream& operator>>(std::istream& in, Polynomial& p) {
     char buffer[256];
     in.getline(buffer, 256);
 
-    char* token = strtok(buffer, " ");
+    char* token = strtok(buffer, "+-");
     char sign = '+';
     int degree = 0;
 
     while (token) {
         if (*token == ' ') {
-            token = strtok(nullptr, " ");
+            ++token;
         }
 
         if (*token == '+' || *token == '-') {
