@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.23)
 
-project(Term)
+project(Functions)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCES term.cpp)
-set(HEADERS term.hpp)
+set(SOURCES functions.cpp)
+set(HEADERS functions.hpp)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 

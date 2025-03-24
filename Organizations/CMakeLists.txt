@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.23)
 
-project(Polynomial)
+project(Organizations)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCES polynomial.cpp)
-set(HEADERS polynomial.hpp)
+set(SOURCES organization.cpp insurance.cpp shipbuilding.cpp plant.cpp)
+set(HEADERS organization.hpp insurance.hpp shipbuilding.hpp plant.hpp)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 
