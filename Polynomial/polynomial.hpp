@@ -121,7 +121,6 @@ Polynomial& Polynomial::operator+=(const Polynomial& p) {
     return *this;
 }
 
-
 Polynomial& Polynomial::operator*=(const Polynomial& p) {
     Polynomial result;
     for (int i = 0; i < size; ++i) {
@@ -155,43 +154,43 @@ std::istream& operator>>(std::istream& in, Polynomial& p) {
     char buffer[256];
     in.getline(buffer, 256);
 
-    char* token = strtok(buffer, "+-");
+    char* token = buffer;
     char sign = '+';
-    int degree = 0;
 
-    while (token) {
-        if (*token == ' ') {
-            ++token;
-        }
-
-        if (*token == '+' || *token == '-') {
-            sign = *token;
-            ++token;
-        }
-
-        Term temp;
-        char tempBuffer[50];
-
-        tempBuffer[0] = sign;
-        std::strcpy(tempBuffer + 1, token);
-
-        std::istringstream tempStream(tempBuffer);
-        tempStream >> temp;
-
-        if (temp.GetCoefficient() == 0) {
-            token = strtok(nullptr, " ");
-            continue;
-        }
-
-        p += Polynomial(temp);
-
-        degree = std::max(p.degree, degree);
-
-        token = strtok(nullptr, " ");
+    if (*token == '+' || *token == '-') {
+        sign = *token;
+        ++token;
     }
 
-    p.degree = degree;
+    while (*token) {
+        while (*token == ' ') {
+            ++token;
+        }
 
+        char* nextOp = std::strchr(token, '+');
+        char* minusOp = std::strchr(token, '-');
+
+        if (minusOp && (!nextOp || minusOp < nextOp)) {
+            nextOp = minusOp;
+        }
+
+        char termBuffer[50];
+        termBuffer[0] = sign;
+        std::strcpy(termBuffer + 1, token);
+
+        std::istringstream tempStream(termBuffer);
+
+        Term temp;
+        tempStream >> temp;
+        p += Polynomial(temp);
+
+        if (nextOp) {
+            sign = *nextOp;
+            token = nextOp + 1;
+        } else {
+            break;
+        }
+    }
     return in;
 }
 
