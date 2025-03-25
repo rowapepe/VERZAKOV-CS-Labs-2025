@@ -167,11 +167,11 @@ std::istream& operator>>(std::istream& in, Polynomial& p) {
             ++token;
         }
 
-        char* nextOp = std::strchr(token, '+');
-        char* minusOp = std::strchr(token, '-');
+        char* nextOperator = std::strchr(token, '+');
+        char* minusOperator = std::strchr(token, '-');
 
-        if (minusOp && (!nextOp || minusOp < nextOp)) {
-            nextOp = minusOp;
+        if (minusOperator && (!nextOperator || minusOperator < nextOperator)) {
+            nextOperator = minusOperator;
         }
 
         char termBuffer[50];
@@ -184,9 +184,9 @@ std::istream& operator>>(std::istream& in, Polynomial& p) {
         tempStream >> temp;
         p += Polynomial(temp);
 
-        if (nextOp) {
-            sign = *nextOp;
-            token = nextOp + 1;
+        if (nextOperator) {
+            sign = *nextOperator;
+            token = nextOperator + 1;
         } else {
             break;
         }
