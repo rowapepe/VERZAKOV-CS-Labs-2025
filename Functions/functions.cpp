@@ -1,30 +1,63 @@
 #include "functions.hpp"
-#include <iostream>
 
-void print(const MyVector<Organization*>& container) {
-    std::cout << "В контейнере содержится:" << std::endl;
-    for (int i = 0; i < container.GetSize(); ++i) {
-        std::cout << (i + 1) << ". ";
-        container[i]->show();
+void print(MyStack::MyStack<Organization*>& container) {
+    if (container.empty()) {
+        std::cout << "Стек пустой." << std::endl;
+        return;
     }
+
+    MyStack::MyStack<Organization*> tempStack;
+    std::cout << "Содержимое стека:" << std::endl;
+    while (!container.empty()) {
+        Organization* org = container.top_inf();
+        org->show();
+        tempStack.push(org);
+        container.pop();
+    }
+
+    while (!tempStack.empty()) {
+        container.push(tempStack.top_inf());
+        tempStack.pop();
+    }
+
     std::cout << std::endl;
 }
 
-bool remove_item(MyVector<Organization*>& container, size_t index) {
-    if (index >= container.GetSize()) {
-        std::cout << "Индекс не валидный." << std::endl;
+bool remove_item(MyStack::MyStack<Organization*>& container, int index) {
+    if (container.empty()) {
         return false;
     }
 
-    delete container[index];
-    return container.delete_element(index);
+    MyStack::MyStack<Organization*> tempStack;
+    int currentIndex = 0;
+
+    while (!container.empty()) {
+        if (currentIndex == index) {
+            Organization* org = container.top_inf();
+            delete org;
+            container.pop();
+            ++currentIndex;
+            continue;
+        }
+
+        Organization* org = container.top_inf();
+        tempStack.push(org);
+        container.pop();
+        ++currentIndex;
+    }
+
+    while (!tempStack.empty()) {
+        container.push(tempStack.top_inf());
+        tempStack.pop();
+    }
+
+    return true;
 }
 
-void clear_container(MyVector<Organization*>& container) {
-    for (int i = 0; i < container.GetSize(); ++i) {
-        delete container[i];
-    }
-    while (container.GetSize() > 0) {
-        container.delete_element(0);
+void clear_container(MyStack::MyStack<Organization*>& container) {
+    while (!container.empty()) {
+        Organization* org = container.top_inf();
+        delete org;
+        container.pop();
     }
 }

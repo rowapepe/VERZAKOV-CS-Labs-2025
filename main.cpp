@@ -3,15 +3,15 @@
 #include "Organizations/organization.hpp"
 #include "Organizations/plant.hpp"
 #include "Organizations/shipbuilding.hpp"
-#include "Vector/myvector.hpp"
+#include "MyStack/MyStack.hpp"
 #include "Functions/functions.hpp"
 
 int main() {
-    MyVector<Organization*> organizations(nullptr, 5);
+    MyStack::MyStack<Organization*> organizations;
 
-    organizations.add_element(new InsuranceCompany("Т-Страхование", 2013, 123131));
-    organizations.add_element(new ShipbuildingCompany("ОСК", 2007, 120));
-    organizations.add_element(new Plant("АвтоВАЗ", 1966, 4100));
+    organizations.push(new InsuranceCompany("Т-Страхование", 2013, 123131));
+    organizations.push(new ShipbuildingCompany("ОСК", 2007, 120));
+    organizations.push(new Plant("АвтоВАЗ", 1966, 4100));
 
     print(organizations);
 

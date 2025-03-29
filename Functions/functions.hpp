@@ -1,10 +1,8 @@
 #pragma once
 
 #include "../Organizations/organization.hpp"
-#include "../Vector/myvector.hpp"
+#include "../MyStack/MyStack.hpp"
 
-void print(const MyVector<Organization*>& container);
-bool remove_item(MyVector<Organization*>& container, size_t index);
-void clear_container(MyVector<Organization*>& container);
-
-
+void print(MyStack::MyStack<Organization*>& container);
+bool remove_item(MyStack::MyStack<Organization*>& container, int index);
+void clear_container(MyStack::MyStack<Organization*>& container);
