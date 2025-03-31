@@ -23,7 +23,7 @@ void print(MyStack::MyStack<Organization*>& container) {
     std::cout << std::endl;
 }
 
-bool remove_item(MyStack::MyStack<Organization*>& container, int index) {
+bool remove(MyStack::MyStack<Organization*>& container, int index) {
     if (container.empty()) {
         return false;
     }
@@ -54,7 +54,7 @@ bool remove_item(MyStack::MyStack<Organization*>& container, int index) {
     return true;
 }
 
-void clear_container(MyStack::MyStack<Organization*>& container) {
+void clear(MyStack::MyStack<Organization*>& container) {
     while (!container.empty()) {
         Organization* org = container.top_inf();
         delete org;

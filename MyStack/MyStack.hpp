@@ -3,9 +3,6 @@
 #include <stdexcept>
 
 namespace MyStack {
-template<class INF>
-class MyStack;
-
 template<class INF, class FRIEND>
 class ListNode {
  private:
@@ -14,12 +11,7 @@ class ListNode {
     ListNode(void) { next = nullptr; }
 
     friend FRIEND;
-    template<class T>
-    friend std::ostream& operator<<(std::ostream& os, const MyStack<T>& stack);
 };
-
-template<class INF>
-std::ostream& operator<<(std::ostream& os, const MyStack<INF>& stack);
 
 template<class INF>
 class MyStack {
@@ -30,13 +22,10 @@ class MyStack {
     MyStack(void);
     MyStack(const MyStack<INF>& other);
     ~MyStack(void);
-    MyStack<INF>& operator=(const MyStack<INF>& other);
     bool empty(void) const;
     bool push(INF n);
     bool pop(void);
     INF top_inf(void) const;
-    static void Multipliers(int n, MyStack<INF>& stack, bool reversed);
-    friend std::ostream& operator<< <>(std::ostream& out, const MyStack<INF>& stack);
 };
 
 template<class INF>
@@ -73,58 +62,6 @@ MyStack<INF>::~MyStack(void) {
     while (!empty()) {
         pop();
     }
-}
-
-template<class INF>
-std::ostream& operator<<(std::ostream& out, const MyStack<INF>& stack) {
-    if (!stack.top) {
-        throw std::runtime_error("Стек пустой, вывод невозможен.");
-    }
-
-    typename MyStack<INF>::Node* current = stack.top;
-    out << current->d;
-    current = current->next;
-    while (current) {
-        out << " " << current->d;
-        current = current->next;
-    }
-    out << std::endl;
-    return out;
-}
-
-template<class INF>
-MyStack<INF>& MyStack<INF>::operator=(const MyStack<INF>& other) {
-    if (other.empty()) {
-        throw std::runtime_error("Стек пустой, копирование невозможно.");
-    }
-
-    if (this == &other) {
-        return *this;
-    }
-
-    while (!empty()) {
-        pop();
-    }
-
-    Node* current = other.top;
-    Node* prevNew = nullptr;
-
-    while (current) {
-        Node* newNode = new Node;
-        newNode->d = current->d;
-        newNode->next = nullptr;
-
-        if (!top) {
-            top = newNode;
-        } else {
-            prevNew->next = newNode;
-        }
-
-        prevNew = newNode;
-        current = current->next;
-    }
-
-    return *this;
 }
 
 template<class INF>
