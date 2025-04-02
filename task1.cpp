@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -6,10 +7,15 @@ int main() {
     std::string str{};
     std::vector<int> dotPositions;
     std::getline(std::cin, str);
-    for (int i = 0; i < str.size(); ++i) {
-        if (str[i] == '.' && (str[i + 1] == '\n' || str[i + 1] == ' ')) {
-            dotPositions.emplace_back(i + 1);
-        }
+
+    dotPositions.push_back(1);
+    size_t pos = 0;
+    int dotsAmout = std::count(str.begin(), str.end(), '.');
+
+    for (int i = 0; i < dotsAmout; ++i) {
+        pos = str.find('.', pos);
+        dotPositions.push_back(pos + 2);
+        ++pos;
     }
 
     std::cout << "Позиции начал предложений: ";

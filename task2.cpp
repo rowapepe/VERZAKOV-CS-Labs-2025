@@ -8,6 +8,7 @@ int main() {
     for (int i = 0; i < str.size(); i += 2) {
         result += str[i];
     }
+
     std::cout << "Резутат: " << result << std::endl;
 
     return 0;

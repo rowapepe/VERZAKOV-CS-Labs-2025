@@ -29,7 +29,7 @@ int main() {
     int counterFalse = std::count(vector.begin(), vector.end(), false);
 
     std::cout << "Количество истинных значений: " << counterTrue << ", ложных значений: " << counterFalse << std::endl;
-    vector.erase(vector.begin() + 1, vector.begin() + 11);
+    vector.erase(vector.begin(), vector.begin() + 10);
     Print(vector);
 
     return 0;
