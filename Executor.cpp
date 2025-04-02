@@ -33,10 +33,13 @@ void addElement(MyStack::MyStack<Organization*>& organizations) {
             break;
         }
         case Type::Ship: {
+            int employees;
             int ships;
+            std::cout << "Введите количество сотрудников: ";
+            std::cin >> employees;
             std::cout << "Введите количество построенных судов: ";
             std::cin >> ships;
-            organizations.push(new ShipbuildingCompany(name, year, ships));
+            organizations.push(new ShipbuildingCompany(name, year, employees, ships));
             break;
         }
         default:
@@ -47,7 +50,7 @@ void addElement(MyStack::MyStack<Organization*>& organizations) {
 
 void demo(MyStack::MyStack<Organization*>& organizations) {
     organizations.push(new InsuranceCompany("Т-Страхование", 2013, 123131));
-    organizations.push(new ShipbuildingCompany("ОСК", 2007, 120));
+    organizations.push(new ShipbuildingCompany("ОСК", 2007, 50, 120));
     organizations.push(new Plant("АвтоВАЗ", 1966, 4100));
 
     print(organizations);

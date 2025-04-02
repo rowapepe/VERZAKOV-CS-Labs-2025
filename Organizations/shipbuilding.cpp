@@ -1,6 +1,6 @@
 #include "shipbuilding.hpp"
 
-ShipbuildingCompany::ShipbuildingCompany(const char* name, int year, int ships) : Organization(name, year), shipsBuilt(ships) {
+ShipbuildingCompany::ShipbuildingCompany(const char* name, int year, int employees, int ships) : Plant(name, year, employees), shipsBuilt(ships) {
     std::cout << "ShipbuildingCompany()" << std::endl;
 }
 
@@ -9,5 +9,6 @@ ShipbuildingCompany::~ShipbuildingCompany() {
 }
 
 void ShipbuildingCompany::show() const {
-    std::cout << "Судостроительная компания: " << name << ", основана в " << year << " году, построено судов: " << shipsBuilt << std::endl;
+    std::cout << "Судостроительная компания: " << name << ", основана в " << year << " году, сотрудников: " << employees
+              << ", построено судов: " << shipsBuilt << std::endl;
 }

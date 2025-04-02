@@ -1,13 +1,13 @@
 #pragma once
 
-#include "organization.hpp"
+#include "plant.hpp"
 
-class ShipbuildingCompany : public Organization {
- private:
+class ShipbuildingCompany : public Plant {
+ protected:
     int shipsBuilt;
 
  public:
-    ShipbuildingCompany(const char* name, int year, int ships);
+    ShipbuildingCompany(const char* name, int year, int employees, int ships);
     ~ShipbuildingCompany() override;
 
     void show() const override;

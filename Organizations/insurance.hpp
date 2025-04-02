@@ -2,7 +2,7 @@
 #include "organization.hpp"
 
 class InsuranceCompany : public Organization {
- private:
+ protected:
     double totalAssets;
 
  public:

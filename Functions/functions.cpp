@@ -8,8 +8,10 @@ void print(MyStack::MyStack<Organization*>& container) {
 
     MyStack::MyStack<Organization*> tempStack;
     std::cout << "Содержимое стека:" << std::endl;
+    int i{};
     while (!container.empty()) {
         Organization* org = container.top_inf();
+        std::cout << i++ << ". ";
         org->show();
         tempStack.push(org);
         container.pop();

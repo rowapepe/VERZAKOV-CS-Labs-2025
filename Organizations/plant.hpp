@@ -3,7 +3,7 @@
 #include "organization.hpp"
 
 class Plant : public Organization {
- private:
+ protected:
     int employees;
 
  public:
